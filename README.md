@@ -1,6 +1,6 @@
-# Playwright Practice Test Login Automation
+# Playwright Student Test Login Automation
 
-This project automates login testing for Practice Test website (practicetestautomation.com) using Playwright with student credentials.
+This project provides test automation for student test login using Playwright with student credentials (student/Password123).
 
 ## 📋 Files Created
 
