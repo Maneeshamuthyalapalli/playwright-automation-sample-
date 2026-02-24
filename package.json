@@ -1,7 +1,7 @@
 {
   "name": "playwright-automation",
   "version": "1.0.0",
-  "description": "",
+  "description": "Playwright automation framework for testing Practice Test Login with student credentials",
   "main": "index.js",
   "scripts": {
     "test": "playwright test",

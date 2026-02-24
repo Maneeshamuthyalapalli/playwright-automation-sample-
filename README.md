@@ -1,11 +1,13 @@
-# Playwright Teams Login Automation
+# Playwright Practice Test Login Automation
 
-This project automates Microsoft Teams login using Playwright.
+This project automates login testing for Practice Test website (practicetestautomation.com) using Playwright with student credentials.
 
 ## 📋 Files Created
 
-- **`tests/example.spec.ts`** - Basic Teams login test
-- **`tests/teams-login.spec.ts`** - Advanced login tests with multiple scenarios
+- **`e2e/practice-login.spec.ts`** - Practice test login automation with 3 test scenarios
+  - TC1: Positive login test (valid credentials)
+  - TC2: Negative username test (invalid username)
+  - TC3: Negative password test (invalid password)
 - **`.env.example`** - Environment variables template
 - **`playwright.config.ts`** - Playwright configuration
 
@@ -29,10 +31,10 @@ copy .env.example .env
 npm test
 ```
 
-### 3. Run Teams-Specific Login Tests
+### 3. Run Practice Test Login Tests
 
 ```bash
-npm run test:teams
+npm run test:practice
 ```
 
 ## 📝 Available Commands
@@ -40,17 +42,17 @@ npm run test:teams
 | Command | Description |
 |---------|-------------|
 | `npm test` | Run all tests |
-| `npm run test:teams` | Run Teams login tests only |
+| `npm run test:practice` | Run practice test login tests only |
 | `npm run test:debug` | Run tests in debug mode (interactive) |
 | `npm run test:headed` | Run tests with browser window visible |
 | `npm run test:report` | View HTML test report |
 
 ## 🔧 Customizing the Script
 
-If the selectors don't match your Teams login page, you can find the correct ones:
+If the selectors don't match the practice test login page, you can find the correct ones:
 
 ### 1. Open Developer Tools
-- Right-click on the Teams login page → **Inspect**
+- Right-click on the practice test login page → **Inspect**
 
 ### 2. Find the Email Field
 ```javascript
@@ -59,14 +61,14 @@ document.querySelector('input[type="email"]')
 ```
 
 ### 3. Update the test file
-In `teams-login.spec.ts`, replace these selectors:
+In `practice-login.spec.ts`, replace these selectors:
 
 ```typescript
-// Old selector
-const emailInput = page.locator('input[type="email"]');
+// Username field
+const usernameInput = page.locator('input#username');
 
-// New selector (if needed)
-const emailInput = page.locator('#youremailid');
+// Password field  
+const passwordInput = page.locator('input#password');
 ```
 
 ## 🛡️ Security Best Practices
@@ -74,7 +76,7 @@ const emailInput = page.locator('#youremailid');
 ✅ **DO:**
 - Use environment variables for credentials (`.env` file)
 - Add `.env` to `.gitignore` (already included)
-- Use `process.env.MS_EMAIL` and `process.env.MS_PASSWORD`
+- Use `process.env.TEST_USERNAME` and `process.env.TEST_PASSWORD`
 
 ❌ **DON'T:**
 - Commit credentials to git
@@ -83,29 +85,30 @@ const emailInput = page.locator('#youremailid');
 
 ## 📊 Test Features
 
-The `teams-login.spec.ts` includes:
+The `practice-login.spec.ts` includes:
 
-1. **Basic Login** - Email → Next → Password → Sign in
-2. **Error Handling** - Detects and validates error messages
-3. **"Stay Signed In" Prompt** - Handles the optional prompt
-4. **Logout Test** - Tests logout functionality
-5. **Network Wait** - Waits for page to fully load
+1. **Positive Login Test (TC1)** - Valid credentials (student/Password123) 
+2. **Negative Username Test (TC2)** - Invalid username validation
+3. **Negative Password Test (TC3)** - Invalid password validation
+4. **Error Message Validation** - Verifies correct error messages appear
+5. **Cross-Browser Testing** - Runs on Chromium, Firefox, and WebKit
+6. **Page Navigation** - Validates successful login redirects
 
 ## 🐛 Troubleshooting
 
 ### Test runs but doesn't log in
-- Check if email/password selectors match your Teams page
-- Verify credentials in `.env` file are correct
+- Check if username/password selectors match the practice test page
+- Verify credentials in `.env` file are correct (student/Password123)
 - Run with `npm run test:headed` to see what's happening
 
 ### "Cannot find selector" error
-- The Teams UI may have changed
-- Inspect the page and find the new selector
+- The practice test page selectors may need updating
+- Inspect the page and find the correct selector
 - Update the test file with the correct selector
 
 ### 2FA/MFA Required
-- The script doesn't handle 2FA yet
-- You can add it manually: `await page.pause();` to pause and enter 2FA code
+- The practice test site uses basic username/password authentication
+- No special handling needed for this site
 
 ## 📚 More Resources
 
